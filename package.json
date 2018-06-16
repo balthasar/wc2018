@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "pages": "git push origin gh-pages"
+    "push-pages": "git add . && git commit -m \"Deploy to gh-pages\" && git push origin gh-pages",
+    "pages": "yarn build && yarn push-pages"
   },
   "dependencies": {
     "vue": "^2.5.16"
@@ -30,7 +31,10 @@
       "@vue/standard"
     ],
     "rules": {
-      "semi": "always"
+      "semi": [
+        2,
+        "always"
+      ]
     },
     "parserOptions": {
       "parser": "babel-eslint"
