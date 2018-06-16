@@ -6,10 +6,10 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "push-pages": "git add . && git commit -m \"Deploy to gh-pages\" && git push origin gh-pages",
-    "pages": "yarn build && yarn push-pages"
+    "deploy": "yarn run build; push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
+    "push-dir": "^0.4.1",
     "vue": "^2.5.16"
   },
   "devDependencies": {
