@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your FIFA World Cup 2018"/>
+    <HelloWorld msg="Welcome to Your FIFA World Cup 2018!"/>
   </div>
 </template>
 
