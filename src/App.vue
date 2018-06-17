@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your FIFA World Cup 2018!"/>
+      <p>
+        <!-- use router-link component for navigation. -->
+        <!-- specify the link by passing the `to` prop. -->
+        <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
+        <router-link to="/">Home</router-link>
+        <router-link to="/all">All Matches</router-link>
+      </p>
+      <router-view />
+    <!-- //<Home /> -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
-
 export default {
   name: 'app',
-  components: {
-    HelloWorld
-  }
+  components: {}
 };
 </script>
 
