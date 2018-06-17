@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    <loading :active.sync="fetching" :can-cancel="false"></loading>
+
     <img src="../assets/logo.png">
     <template v-if="live">
       <h3>Live</h3>
@@ -19,6 +21,8 @@
 <script>
 import Match from './Match.vue';
 import ENUMS from '../common/constants.js';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.min.css';
 
 export default {
   name: 'Home',
@@ -27,13 +31,16 @@ export default {
       currentMatch: {},
       todaysMatches: [],
       live: null,
-      today: null
+      today: null,
+      fetching: false
     };
   },
   components: {
-    Match
+    Match,
+    Loading
   },
   created: function() {
+    this.fetching = true;
     this.fetchLive();
     this.fetchToday();
   },
@@ -46,6 +53,7 @@ export default {
           this.currentMatch = response.body[0];
           this.live = true;
         }
+        this.fetching = false;
       });
     },
 
