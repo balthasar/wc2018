@@ -10,6 +10,7 @@
 
 <script>
 import Match from './Match.vue';
+import ENUMS from '../common/constants';
 
 export default {
   name: 'AllMatches',
@@ -27,16 +28,14 @@ export default {
   },
   methods: {
     fetch: function() {
-      this.$http
-        .get('http://worldcup.sfg.io/matches/?by_date=ASC')
-        .then(response => {
-          if (response.body && response.body.length > 0) {
-            this.matches = response.body;
-            this.fetched = true;
-          } else {
-            this.fetched = false;
-          }
-        });
+      this.$http.get(ENUMS.URL + '/matches/?by_date=ASC').then(response => {
+        if (response.body && response.body.length > 0) {
+          this.matches = response.body;
+          this.fetched = true;
+        } else {
+          this.fetched = false;
+        }
+      });
     }
   }
 };

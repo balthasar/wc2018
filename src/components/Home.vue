@@ -18,6 +18,7 @@
 
 <script>
 import Match from './Match.vue';
+import ENUMS from '../common/constants.js';
 
 export default {
   name: 'Home',
@@ -39,19 +40,17 @@ export default {
 
   methods: {
     fetchLive: function() {
-      this.$http
-        .get('http://worldcup.sfg.io/matches/current')
-        .then(response => {
-          console.log(response);
-          if (response.body && response.body.length > 0) {
-            this.currentMatch = response.body[0];
-            this.live = true;
-          }
-        });
+      this.$http.get(ENUMS.URL + '/matches/current').then(response => {
+        console.log(response);
+        if (response.body && response.body.length > 0) {
+          this.currentMatch = response.body[0];
+          this.live = true;
+        }
+      });
     },
 
     fetchToday: function() {
-      this.$http.get('http://worldcup.sfg.io/matches/today').then(response => {
+      this.$http.get(ENUMS.URL + '/matches/today').then(response => {
         console.log(response);
         if (response.body && response.body.length > 0) {
           this.todaysMatches = response.body;
