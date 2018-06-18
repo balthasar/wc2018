@@ -6,6 +6,7 @@ import App from './App.vue';
 
 import Home from './components/Home';
 import AllMatches from './components/AllMatches';
+import './registerServiceWorker';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
