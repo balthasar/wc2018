@@ -7,7 +7,7 @@
       </div>
       <div class="divider">
         <span class="time">{{ getTime(match.time) }}</span>
-       <span class="score">{{ match.home_team.goals }} - {{ match.away_team.goals }}</span>
+       <span class="score" v-show="match.status != 'future'">{{ match.home_team.goals }} - {{ match.away_team.goals }}</span>
        </div>
       <div class="team away-team">
         <img class="team-img" v-bind:src="teamSrc(match.away_team.code)" />
@@ -29,15 +29,7 @@ export default {
       return require('../assets/teams/sml/' + code.toLowerCase() + '.png');
     },
     getTime: function(time) {
-      if (time === 'full-time') {
-        return 'FT';
-      }
-
-      if (time === 'half-time') {
-        return 'HT';
-      }
-
-      return time;
+      return time ? time.toUpperCase() : '';
     }
   }
 };
@@ -62,12 +54,12 @@ h3 {
 
 .team {
   display: inline-block;
-  width: 45%;
+  width: 40%;
 }
 
 .divider {
   display: inline-block;
-  width: 10%;
+  width: 20%;
 }
 
 .home-team {
@@ -86,5 +78,6 @@ h3 {
 .time {
   font-weight: bolder;
   display: block;
+  font-size: x-small;
 }
 </style>
