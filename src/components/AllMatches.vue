@@ -4,14 +4,14 @@
     <h3>All Matches</h3>
 
     <template v-for="(match, index) in matches">
-      <Match :match="match" :key="index"/>
+      <QuickMatch :match="match" :key="index"/>
     </template>
     <p v-show="error">There is an error getting all the matches</p>
   </div>
 </template>
 
 <script>
-import Match from './Match.vue';
+import QuickMatch from './QuickMatch.vue';
 import ENUMS from '../common/constants';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.min.css';
@@ -26,7 +26,7 @@ export default {
     };
   },
   components: {
-    Match,
+    QuickMatch,
     Loading
   },
   created: function() {
@@ -35,14 +35,20 @@ export default {
   methods: {
     fetch: function() {
       this.fetching = true;
-      this.$http.get(ENUMS.URL + '/matches/?by_date=ASC').then(response => {
-        if (response.body && response.body.length > 0) {
-          this.matches = response.body;
-        } else {
-          this.error = false;
+      this.$http.get(ENUMS.URL + '/matches/?by_date=ASC').then(
+        response => {
+          if (response.body && response.body.length > 0) {
+            this.matches = response.body;
+          } else {
+            this.error = false;
+          }
+          this.fetching = false;
+        },
+        reponse => {
+          this.error = true;
+          this.fetching = false;
         }
-        this.fetching = false;
-      });
+      );
     }
   }
 };

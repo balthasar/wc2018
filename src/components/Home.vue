@@ -5,13 +5,13 @@
     <img src="../assets/logo.png">
     <template v-if="live">
       <h3>Live</h3>
-      <Match :match="currentMatch"></Match>
+      <QuickMatch :match="currentMatch"></QuickMatch>
     </template>
     <div>
       <h3>Today's Matches</h3>
       <p v-show="today === false">There aren't any matches today</p>
       <template v-for="(match, index) in todaysMatches">
-        <Match :match="match" :key="index"/>
+        <QuickMatch :match="match" :key="index"/>
       </template>
     </div>
   </div>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Match from './Match.vue';
+import QuickMatch from './QuickMatch.vue';
 import ENUMS from '../common/constants.js';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.min.css';
@@ -36,7 +36,7 @@ export default {
     };
   },
   components: {
-    Match,
+    QuickMatch,
     Loading
   },
   created: function() {
@@ -48,7 +48,6 @@ export default {
   methods: {
     fetchLive: function() {
       this.$http.get(ENUMS.URL + '/matches/current').then(response => {
-        console.log(response);
         if (response.body && response.body.length > 0) {
           this.currentMatch = response.body[0];
           this.live = true;
@@ -59,7 +58,6 @@ export default {
 
     fetchToday: function() {
       this.$http.get(ENUMS.URL + '/matches/today').then(response => {
-        console.log(response);
         if (response.body && response.body.length > 0) {
           this.todaysMatches = response.body;
           this.today = true;
