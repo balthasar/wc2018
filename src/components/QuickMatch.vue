@@ -6,7 +6,8 @@
         <img class="team-img" v-bind:src="teamSrc(match.home_team.code)" />
       </div>
       <div class="divider">
-       {{match.home_team.goals}} - {{match.away_team.goals}}
+        <span class="time">{{ getTime(match.time) }}</span>
+       <span class="score">{{ match.home_team.goals }} - {{ match.away_team.goals }}</span>
        </div>
       <div class="team away-team">
         <img class="team-img" v-bind:src="teamSrc(match.away_team.code)" />
@@ -25,7 +26,18 @@ export default {
   },
   methods: {
     teamSrc: function(code) {
-      return require('../assets/teams/' + code.toLowerCase() + '.png');
+      return require('../assets/teams/sml/' + code.toLowerCase() + '.png');
+    },
+    getTime: function(time) {
+      if (time === 'full-time') {
+        return 'FT';
+      }
+
+      if (time === 'half-time') {
+        return 'HT';
+      }
+
+      return time;
     }
   }
 };
@@ -69,5 +81,10 @@ h3 {
 .team-img {
   height: 40px;
   vertical-align: middle;
+}
+
+.time {
+  font-weight: bolder;
+  display: block;
 }
 </style>
