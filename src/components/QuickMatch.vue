@@ -45,6 +45,7 @@ h3 {
   margin: 10px auto;
   max-width: 500px;
   vertical-align: middle;
+  font-size: 14px;
 }
 
 .clear {
